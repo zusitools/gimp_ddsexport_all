@@ -26,7 +26,7 @@ def file_save_dds_visible(img, drawable) :
 					action=gtk.FILE_CHOOSER_ACTION_SAVE,
 					buttons=(gtk.STOCK_CANCEL,
 							gtk.RESPONSE_CANCEL,
-							gtk.STOCK_OPEN,
+							gtk.STOCK_SAVE,
 							gtk.RESPONSE_OK))
 							
 	chooser.set_filename(filename)
