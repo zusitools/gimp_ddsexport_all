@@ -42,6 +42,10 @@ def file_save_dds_visible(img, drawable) :
 	
 	# Speichere gewaehlten Dateinamen im Bild als "Parasit"
 	img.attach_new_parasite("file_save_dds_visible-filename", 0, filename)
+
+	# Auswahl entfernen (sonst wird bei "Kopiere Sichtbares" nur die Auswahl kopiert)
+	selection = pdb.gimp_selection_save(img)
+	pdb.gimp_selection_none(img)
 	
 	# Kopiere alles Sichtbare in einen neuen Buffer und exportiere den als DDS:
 	pdb.gimp_edit_named_copy_visible(img, "ImgVisible")
@@ -52,6 +56,10 @@ def file_save_dds_visible(img, drawable) :
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0,
 		run_mode=RUN_INTERACTIVE)
 	pdb.gimp_buffer_delete("ImgVisible")
+
+	# Auswahl wiederherstellen
+	pdb.gimp_image_select_item(img, CHANNEL_OP_REPLACE, selection)
+	pdb.gimp_image_remove_channel(img, selection)
 
 register(
 	"file-save-dds-visible",
